@@ -12,6 +12,7 @@ module.exports.routes = {
 
     'POST /account/login': 'account/login',
     'POST /account/register': 'account/register',
-    'POST /account/logout': 'account/logout'
+    'POST /account/logout': 'account/logout',
+    'GET /account/activate': 'account/activate'
 
 };

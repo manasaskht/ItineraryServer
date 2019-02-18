@@ -53,6 +53,16 @@ module.exports = {
             description: 'The confirmation status of the user\'s email address.'
         },
 
+        emailVerifyCode: {
+            type: 'string',
+            description: 'The confirmation status of the user\'s email address.'
+        },
+
+        emailVerifyExpireTime: {
+            type: 'number',
+            description: 'The confirmation status of the user\'s email address.'
+        },
+
 
         //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
         //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

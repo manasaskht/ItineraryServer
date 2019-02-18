@@ -48,12 +48,13 @@ module.exports = {
         if (loginUser && loginUser.emailStatus === 'confirmed') {
             // let privateKey = fs.readFileSync(sails.config.appPath + '/config/jwt-secret/dev.key', 'utf-8')
             let payload = {
-                userId: loginUser._id
+                userId: loginUser.id
             };
             let jwtToken = jwt.sign(payload, sails.config.session.secret, { expiresIn: '24h' });
-            return exits.success(Object.assign(loginUser, {
-                token: jwtToken
-            }));
+            return exits.success({
+                token: jwtToken,
+                email: loginUser.emailAddress
+            });
         } else {
             return exits.userNotFound({ message: 'Login User or Password Invalid.' });
         }
