@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 module.exports = {
 
@@ -78,10 +79,41 @@ module.exports = {
                 // Unconfirmed user created before 3 seconds
                 createdUser = await User.update({ emailAddress: createdUser.emailAddress }).set(newUser).fetch();
             } else if (createdUser.emailStatus === "confirmed") {
-                return exits.alreadyExists({ messages: 'User already exists.' });
+                return exits.alreadyExists({ message: 'User already exists.' });
             }
 
-            console.log(`Email Token for ${createdUser[0].emailAddress}: ${emailToken} and id is ${createdUser[0].id}`);
+            let finalUser = null;
+            if (Array.isArray(createdUser)) {
+                finalUser = createdUser[0];
+            } else {
+                finalUser = createdUser;
+            }
+
+            //Send email
+            var transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: 'test.itinerary.gmail.com',
+                    pass: '!t!n3r@ry'
+                }
+            });
+
+            const mailOptions = {
+                from: 'test.titinerary@gmail.com', // sender address
+                to: finalUser.emailAddress, // list of receivers
+                subject: 'Welcome to Itinerary Builder', // Subject line
+                html: `<h2>Hi, ${finalUser.firstName}</h2><p>To activate your account click on http://localhost:1337/account/activate?userId=${finalUser.id}&token=${emailToken} .</p>` // plain text body
+            };
+
+            transporter.sendMail(mailOptions, function (err, info) {
+                if (err)
+                    console.log('error in sending mail', err)
+                else
+                    console.log('mail sent sucessfully', info);
+            });
+
+            console.log(`Email Token for ${finalUser.emailAddress}: ${emailToken} and id is ${finalUser.id}`);
+            console.log(`Link is http://localhost:1337/account/activate?userId=${finalUser.id}&token=${emailToken}`);
             return exits.success({ message: 'User successfully created. Please verify email to activate.' });
         } else {
             console.log('Unable to create user on database');

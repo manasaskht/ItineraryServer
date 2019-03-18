@@ -44,19 +44,21 @@ module.exports = {
             emailAddress: inputs.email,
             password: hashedPwd
         });
-        delete loginUser['password'];
         if (loginUser && loginUser.emailStatus === 'confirmed') {
             // let privateKey = fs.readFileSync(sails.config.appPath + '/config/jwt-secret/dev.key', 'utf-8')
+            delete loginUser['password'];
             let payload = {
                 userId: loginUser.id
             };
             let jwtToken = jwt.sign(payload, sails.config.session.secret, { expiresIn: '24h' });
             return exits.success({
                 token: jwtToken,
+                firstName: loginUser.firstName,
+                lastName: loginUser.lastName,
                 email: loginUser.emailAddress
             });
         } else {
-            return exits.userNotFound({ message: 'Login User or Password Invalid.' });
+            return exits.userNotFound({ message: 'Login Email or Password Invalid.' });
         }
     }
 };
