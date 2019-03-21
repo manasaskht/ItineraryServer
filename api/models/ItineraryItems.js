@@ -22,8 +22,26 @@ module.exports = {
 
         description: {
             type: 'string',
+            required: true,
             maxLength: 3000,
             example: 'Boarding at 5:30am.'
+        },
+
+        category: {
+            type: 'string',
+            required: true
+        },
+
+        location: {
+            type: 'string'
+        },
+
+        locationLatLng: {
+            type: 'string'
+        },
+        dateTime: {
+            type: 'number',
+            required: true
         },
 
 

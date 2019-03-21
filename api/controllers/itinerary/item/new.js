@@ -22,6 +22,20 @@ module.exports = {
             type: 'string',
             description: 'itinerary to which this item belong',
             required: true
+        },
+        category: {
+            type: 'string',
+            required: true
+        },
+        location: {
+            type: 'string'
+        },
+        locationLatLng: {
+            type: 'string'
+        },
+        dateTime: {
+            type: 'number',
+            required: true
         }
     },
 
@@ -35,11 +49,17 @@ module.exports = {
 
 
     fn: async function (inputs, exits) {
-        let itineraryItem = await ItineraryItems.create({
+        let itemVals = {
             title: inputs.title,
             description: inputs.description,
-            itinerary: inputs.itineraryId
-        }).fetch();
+            itinerary: inputs.itineraryId,
+            category: inputs.category,
+            location: inputs.location,
+            dateTime: inputs.dateTime,
+            locationLatLng: inputs.locationLatLng
+        };
+        itemVals = _.pick(itemVals, _.identity);
+        let itineraryItem = await ItineraryItems.create(itemVals).fetch();
         return exits.success({ itineraryItem, message: 'Item successfully created.' });
     }
 
