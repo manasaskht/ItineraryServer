@@ -31,7 +31,7 @@ module.exports = {
     fn: async function (inputs, exits) {
         let isUsersItinerary = await Itineraries.find({ id: inputs.itineraryId, creator: this.req.me.id });
         if (isUsersItinerary) {
-            let itineraryItems = await ItineraryItems.find({ itinerary: inputs.itineraryId });
+            let itineraryItems = await ItineraryItems.find({ itinerary: inputs.itineraryId }).sort([{ dateTime: 'ASC' }]);
             return exits.success(itineraryItems);
         } else {
             return exits.error({ message: 'Invalid itinerary requested.' })

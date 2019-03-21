@@ -26,6 +26,6 @@ module.exports.routes = {
     'PUT itinerary/notes/new': 'itinerary/notes/new',
     'DELETE itinerary/notes/delete': 'itinerary/notes/delete',
 
-
-
+    'DELETE /itinerary/item/delete': 'itinerary/item/delete',
+    'PUT /itinerary/item/edit': 'itinerary/item/edit'
 };
