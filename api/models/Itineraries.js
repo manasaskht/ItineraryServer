@@ -44,6 +44,11 @@ module.exports = {
         creator: {
             model: 'user',
             required: true
+        },
+
+        usergroup: {
+            collection: 'user',
+            required: false
         }
     },
 
