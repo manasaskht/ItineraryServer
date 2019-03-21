@@ -20,4 +20,8 @@ module.exports.routes = {
 
     'GET /itinerary/ls': 'itinerary/list',
     'GET /itinerary/item/ls': 'itinerary/item/list',
+
+    'GET /itinerary/notes': 'itinerary/list',
+
+
 };
