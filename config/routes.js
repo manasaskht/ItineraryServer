@@ -27,5 +27,8 @@ module.exports.routes = {
     'DELETE itinerary/notes/delete': 'itinerary/notes/delete',
 
     'DELETE /itinerary/item/delete': 'itinerary/item/delete',
-    'PUT /itinerary/item/edit': 'itinerary/item/edit'
+    'PUT /itinerary/item/edit': 'itinerary/item/edit',
+
+    'POST social/addfriend': 'social/addfriend',
+    'GET social/getfriends': 'social/getfriends'
 };
