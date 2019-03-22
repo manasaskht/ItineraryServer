@@ -28,8 +28,8 @@ module.exports = {
       required: true
     },
 
-    friends: {
-      collection: 'user',
+    friend: {
+      model: 'user',
       required: false
     }
   },
