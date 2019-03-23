@@ -1,5 +1,5 @@
 /**
- * Friends.js
+ * Groups.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,6 +13,10 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    archived: {
+      type: 'boolean',
+      defaultsTo: false
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -23,21 +27,17 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    user: {
-      model: 'user',
+    itinerary: {
+      model: 'itineraries',
       required: true
     },
 
-    friend: {
-      model: 'user',
-      required: false
-    },
-
-    belongTo: {
-      collection: 'groups',
-      via: 'members',
+    members: {
+      collection: 'friends',
+      via: 'belongTo',
       through: 'groupmembers'
     }
+
   },
 
 };
