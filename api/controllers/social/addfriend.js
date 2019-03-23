@@ -42,28 +42,24 @@ module.exports = {
         emailAddress: inputs.emailId
       });
       if (!addedUser) {
-        return exits.userNotFound();
+        return exits.userNotFound({message: 'User Not Found'});
       }
       else {
-        // if (await Friends.find({ userId: this.req.me.emailAddress }).populate('user')) {
-          let existingFriend = await Friends.findOne({ user: this.req.me.id, friend: addedUser.id})
-          if (existingFriend) {
-            return exits.friendAlreadyExists({ message: "Friend already exists"})
-          }
-          else {
-            let status = await Friends.create({
-              user: this.req.me.id,
-              friend: addedUser.id
-            });
-          }
-          // if (status) {
-            return exits.success();
-          // }
-        // }
+        let existingFriend = await Friends.findOne({ user: this.req.me.id, friend: addedUser.id})
+        if (existingFriend) {
+          return exits.friendAlreadyExists({ message: "Friend already exists"})
+        }
+        else {
+          await Friends.create({
+            user: this.req.me.id,
+            friend: addedUser.id
+          });
+          return exits.success({message: 'Friend Added'});
+        }
       }
     }
     else {
-      return exits.selfAddition();
+      return exits.selfAddition({message: 'Can not add yourself'});
     }
 
   }

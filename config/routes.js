@@ -30,5 +30,6 @@ module.exports.routes = {
     'PUT /itinerary/item/edit': 'itinerary/item/edit',
 
     'POST social/addfriend': 'social/addfriend',
-    'GET social/getfriends': 'social/getfriends'
+    'GET social/getfriends': 'social/getfriends',
+    'DELETE social/deletefriend': 'social/deletefriend'
 };
