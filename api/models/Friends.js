@@ -31,12 +31,6 @@ module.exports = {
     friend: {
       model: 'user',
       required: false
-    },
-
-    belongTo: {
-      collection: 'groups',
-      via: 'members',
-      through: 'groupmembers'
     }
   },
 

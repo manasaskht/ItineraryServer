@@ -73,6 +73,13 @@ module.exports = {
         //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
         //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
+        
+
+        belongTo: {
+            collection: 'groups',
+            via: 'members'
+        }
+
     },
 
 };

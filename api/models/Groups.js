@@ -13,6 +13,13 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    name: {
+      type: 'string',
+      required: true,
+      maxLength: 500,
+      example: 'Trip to Mars'
+    },
+
     archived: {
       type: 'boolean',
       defaultsTo: false
@@ -33,9 +40,8 @@ module.exports = {
     },
 
     members: {
-      collection: 'friends',
-      via: 'belongTo',
-      through: 'groupmembers'
+      collection: 'user',
+      via: 'belongTo'
     }
 
   },
