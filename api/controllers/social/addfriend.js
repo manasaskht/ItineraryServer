@@ -37,19 +37,23 @@ module.exports = {
 
   fn: async function (inputs,exits) {
 
+    // Check if the email id is user's own email id
     if(inputs.emailId != this.req.me.emailAddress) {
       let addedUser = await User.findOne ({
         emailAddress: inputs.emailId
       });
+      // Check if the user exists
       if (!addedUser) {
         return exits.userNotFound({message: 'User Not Found'});
       }
       else {
+        // Check if the friend has already been added to the database
         let existingFriend = await Friends.findOne({ user: this.req.me.id, friend: addedUser.id})
         if (existingFriend) {
           return exits.friendAlreadyExists({ message: "Friend already exists"})
         }
         else {
+          // Add friend to the database
           await Friends.create({
             user: this.req.me.id,
             friend: addedUser.id

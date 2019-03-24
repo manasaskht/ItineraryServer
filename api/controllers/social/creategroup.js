@@ -7,6 +7,7 @@ module.exports = {
   description: 'Creategroup social.',
 
 
+  // Get itinerary ID and Name for associating with the group
   inputs: {
     id: {
       type: 'string',
@@ -33,6 +34,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
+    // Check if the group already exists
     let group = await Groups.findOne({
       itinerary: inputs.id
     })
@@ -41,6 +43,7 @@ module.exports = {
         name: inputs.title,
         itinerary: inputs.id
       }).fetch();
+      // Add current user to the group
       await Groups.addToCollection(group.id, 'members', this.req.me.id);
     }
     else {
