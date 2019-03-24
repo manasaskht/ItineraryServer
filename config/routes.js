@@ -31,5 +31,8 @@ module.exports.routes = {
 
     'POST social/addfriend': 'social/addfriend',
     'GET social/getfriends': 'social/getfriends',
-    'DELETE social/deletefriend': 'social/deletefriend'
+    'DELETE social/deletefriend': 'social/deletefriend',
+
+    'POST social/creategroup': 'social/creategroup',
+    'GET social/getgroups': 'social/getgroups'
 };
