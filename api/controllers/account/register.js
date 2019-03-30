@@ -90,14 +90,6 @@ module.exports = {
             }
 
             //Send email
-            // var transporter = nodemailer.createTransport({
-            //     service: 'Gmail',
-            //     auth: {
-            //         user: 'test.itinerary.gmail.com',
-            //         pass: '!t!n3r@ry'
-            //     }
-            // });
-
             let transporter = nodemailer.createTransport({
                 service: 'SendGrid',
                 auth: {
@@ -106,6 +98,7 @@ module.exports = {
                 }
             });
 
+            let clientServer = sails.config.custom.clientServer;
             const mailOptions = {
                 from: 'noreply@itineraryplanner.com', // sender address
                 to: finalUser.emailAddress, // list of receivers
