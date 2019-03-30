@@ -48,7 +48,7 @@ module.exports = {
 
         usergroup: {
             collection: 'user',
-            required: false
+            via: 'maintain'
         }
     },
 

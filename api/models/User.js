@@ -78,6 +78,11 @@ module.exports = {
         belongTo: {
             collection: 'groups',
             via: 'members'
+        },
+
+        maintain: {
+            collection: 'itineraries',
+            via: 'usergroup'
         }
 
     },
