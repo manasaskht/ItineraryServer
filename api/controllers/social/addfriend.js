@@ -58,6 +58,10 @@ module.exports = {
             user: this.req.me.id,
             friend: addedUser.id
           });
+          await Friends.create({
+            user: addedUser.id,
+            friend: this.req.me.id
+          });
           return exits.success({message: 'Friend Added'});
         }
       }

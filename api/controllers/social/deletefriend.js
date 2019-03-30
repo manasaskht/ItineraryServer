@@ -27,6 +27,7 @@ module.exports = {
 
     // Delete the specified friend for the logged-in user
     let status = await Friends.destroy({ user: this.req.me.id, friend: inputs.id}).fetch();
+    let status = await Friends.destroy({ user: inputs.id, friend: this.req.me.id}).fetch();
     return exits.success({ message: 'Friend Deleted'});
 
   }
