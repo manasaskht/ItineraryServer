@@ -90,19 +90,42 @@ module.exports = {
             }
 
             //Send email
-            var transporter = nodemailer.createTransport({
-                service: 'Gmail',
+            // var transporter = nodemailer.createTransport({
+            //     service: 'Gmail',
+            //     auth: {
+            //         user: 'test.itinerary.gmail.com',
+            //         pass: '!t!n3r@ry'
+            //     }
+            // });
+
+            let transporter = nodemailer.createTransport({
+                service: 'SendGrid',
                 auth: {
-                    user: 'test.itinerary.gmail.com',
-                    pass: '!t!n3r@ry'
+                    user: 'nikhltyagi',
+                    pass: 'mynewS3ndGr!d'
                 }
             });
 
             const mailOptions = {
-                from: 'test.titinerary@gmail.com', // sender address
+                from: 'noreply@itineraryplanner.com', // sender address
                 to: finalUser.emailAddress, // list of receivers
                 subject: 'Welcome to Itinerary Builder', // Subject line
-                html: `<h2>Hi, ${finalUser.firstName}</h2><p>To activate your account click on http://localhost:1337/account/activate?userId=${finalUser.id}&token=${emailToken} .</p>` // plain text body
+                html: `
+                Hi <b>${finalUser.firstName}</b>,
+                <p>
+                Welcome to Itinerary Planner. Following are the the things you can do to make your trip more enjoyable.
+                <ul>
+                    <li>Create group itineraries</li>
+                    <li>Visualize them in on a map</li>
+                    <li>Create timeline, notes.</li>
+                    <li>Chat with your friends.</li>
+                </ul>
+                And much more...
+                </p>
+                <p>To activate your account click on <a href="http://localhost:1337/account/activate?userId=${finalUser.id}&token=${emailToken}">link</a> .</p>
+                Thanks<br>
+                Team Itinerary Planner
+                ` // plain text body
             };
 
             transporter.sendMail(mailOptions, function (err, info) {
@@ -111,6 +134,7 @@ module.exports = {
                 else
                     console.log('mail sent sucessfully', info);
             });
+            // End send email
 
             console.log(`Email Token for ${finalUser.emailAddress}: ${emailToken} and id is ${finalUser.id}`);
             console.log(`Link is http://localhost:1337/account/activate?userId=${finalUser.id}&token=${emailToken}`);
