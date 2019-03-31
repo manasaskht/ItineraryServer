@@ -25,9 +25,18 @@ module.exports = {
         let allGroups = [];
 
         // Add each groups information to a collection and return it
-        memberGroups.belongTo.forEach(element => {
-            allGroups.push({ title: element.name, members: element.members });
-        });
+        // memberGroups.belongTo.forEach(element => {
+        //     allGroups.push({ title: element.name, members: element.members });
+        // });
+
+        let i = 0;
+        while (i < memberGroups.belongTo.length) {
+            let rawMembers = await Groups.findOne({ id: memberGroups.belongTo[i].id }).populate('members');
+            if (allGroups.findIndex(group => group.title === memberGroups.belongTo[i].name) < 0) {
+                allGroups.push({ title: memberGroups.belongTo[i].name, members: rawMembers.members });
+            }
+            i++;
+        }
         return exits.success(allGroups);
 
     }
