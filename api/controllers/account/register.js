@@ -129,8 +129,8 @@ module.exports = {
             });
             // End send email
 
-            console.log(`Email Token for ${finalUser.emailAddress}: ${emailToken} and id is ${finalUser.id}`);
-            console.log(`Link is http://localhost:1337/account/activate?userId=${finalUser.id}&token=${emailToken}`);
+            // console.log(`Email Token for ${finalUser.emailAddress}: ${emailToken} and id is ${finalUser.id}`);
+            // console.log(`Link is http://localhost:1337/account/activate?userId=${finalUser.id}&token=${emailToken}`);
             return exits.success({ message: 'User successfully created. Please verify email to activate.' });
         } else {
             console.log('Unable to create user on database');
