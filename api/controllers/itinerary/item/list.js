@@ -29,7 +29,8 @@ module.exports = {
 
 
     fn: async function (inputs, exits) {
-        let isUsersItinerary = await Itineraries.find({ id: inputs.itineraryId, creator: this.req.me.id });
+        let isUsersItinerary = await Itineraries.findOne({ id: inputs.itineraryId }).populate('usergroup', { id: this.req.me.id });
+        isUsersItinerary = isUsersItinerary.creator === this.req.me.id || isUsersItinerary.usergroup.findIndex(d => d.id === this.req.me.id) > -1;
         if (isUsersItinerary) {
             let itineraryItems = await ItineraryItems.find({ itinerary: inputs.itineraryId }).sort([{ dateTime: 'ASC' }]);
             return exits.success(itineraryItems);

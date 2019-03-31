@@ -22,10 +22,22 @@ module.exports.routes = {
     'GET /itinerary/item/ls': 'itinerary/item/list',
 
     'GET /itinerary/notes': 'itinerary/notes/list',
-    'POST itinerary/notes/update': 'itinerary/notes/update',
-    'PUT itinerary/notes/new': 'itinerary/notes/new',
-    'DELETE itinerary/notes/delete': 'itinerary/notes/delete',
+    'PUT /itinerary/notes/update': 'itinerary/notes/update',
+    'POST /itinerary/notes/new': 'itinerary/notes/new',
+    'DELETE /itinerary/notes/delete': 'itinerary/notes/delete',
 
     'DELETE /itinerary/item/delete': 'itinerary/item/delete',
-    'PUT /itinerary/item/edit': 'itinerary/item/edit'
+    'PUT /itinerary/item/edit': 'itinerary/item/edit',
+
+    'POST /social/friend/add': 'social/addfriend',
+    'GET /social/friend/get': 'social/getfriends',
+    'DELETE /social/friend/delete': 'social/deletefriend',
+
+    'POST /social/group/create': 'social/creategroup',
+    'GET /social/group/get': 'social/getgroups',
+    'POST /social/group/member/add': 'social/addgroupmember',
+    'GET /social/group/member/get': 'social/getgroupmembers',
+
+    'POST /chat/friend/add': 'chat/add',
+    'POST /chat/group/add': 'chat/addgroup'
 };
