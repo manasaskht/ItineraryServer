@@ -25,9 +25,14 @@ module.exports = {
         let allGroups = [];
 
         // Add each groups information to a collection and return it
-        memberGroups.belongTo.forEach(element => {
-            allGroups.push({ title: element.name, members: element.members });
-        });
+        // memberGroups.belongTo.forEach(element => {
+        //     allGroups.push({ title: element.name, members: element.members });
+        // });
+
+        for (i = 0; i < memberGroups.belongTo.length; i += 1) {
+            let rawMembers = await Groups.findOne({ id: memberGroups.belongTo[i].id }).populate('members');
+            allGroups.push({ title: memberGroups.belongTo[i].name, members: rawMembers.members });
+        }
         return exits.success(allGroups);
 
     }

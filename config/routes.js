@@ -36,8 +36,9 @@ module.exports.routes = {
     'POST /social/group/create': 'social/creategroup',
     'GET /social/group/get': 'social/getgroups',
     'POST /social/group/member/add': 'social/addgroupmember',
-    'GET /social/group/member/get': 'social/getgroupmembers',
 
     'POST /chat/friend/add': 'chat/add',
-    'POST /chat/group/add': 'chat/addgroup'
+    'POST /chat/group/add': 'chat/addgroup',
+    'POST /chat/message/send': 'chat/send',
+    'GET /chat/message/get': 'chat/get'
 };
