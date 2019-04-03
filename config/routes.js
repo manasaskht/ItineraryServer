@@ -36,6 +36,7 @@ module.exports.routes = {
     'POST /social/group/create': 'social/creategroup',
     'GET /social/group/get': 'social/getgroups',
     'POST /social/group/member/add': 'social/addgroupmember',
+    'DELETE /chat/friend/remove': 'social/removemember',
 
     'POST /chat/friend/add': 'chat/add',
     'POST /chat/group/add': 'chat/addgroup',

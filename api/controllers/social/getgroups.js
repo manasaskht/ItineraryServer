@@ -29,9 +29,13 @@ module.exports = {
         //     allGroups.push({ title: element.name, members: element.members });
         // });
 
-        for (i = 0; i < memberGroups.belongTo.length; i += 1) {
+        let i = 0;
+        while (i < memberGroups.belongTo.length) {
             let rawMembers = await Groups.findOne({ id: memberGroups.belongTo[i].id }).populate('members');
-            allGroups.push({ title: memberGroups.belongTo[i].name, members: rawMembers.members });
+            if (allGroups.findIndex(group => group.title === memberGroups.belongTo[i].name) < 0) {
+                allGroups.push({ title: memberGroups.belongTo[i].name, members: rawMembers.members });
+            }
+            i++;
         }
         return exits.success(allGroups);
 

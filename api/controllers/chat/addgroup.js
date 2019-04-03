@@ -34,7 +34,7 @@ module.exports = {
         for (i = 0; i < members.members.length; i += 1) {
             if (addedMembers.usergroup.length === 0) {
                 await User.addToCollection(members.members[i].id, 'maintain', inputs.itineraryId);
-            } else if (!addedMembers.usergroup.findOne({ id: element.id })) {
+            } else if (addedMembers.usergroup.findIndex(group => group.id === members.members[i].id) >= 0) {
                 await User.addToCollection(members.members[i].id, 'maintain', inputs.itineraryId);
             }
         }
