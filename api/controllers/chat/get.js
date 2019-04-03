@@ -29,11 +29,11 @@ module.exports = {
             return;
         }
         let messages = await Chat.find({ group: group.id }).sort('createdAt DESC');
-        for (i = 0; i < messages.length; i += 1) {
+        for (let i = 0; i < messages.length; i += 1) {
             let user = await User.findOne({ id: messages[i].sender });
             messages[i].senderName = user.firstName + ' ' + user.lastName;
         }
-        return exits.success(messages);
+        return exits.success(messagses);
     }
 
 
