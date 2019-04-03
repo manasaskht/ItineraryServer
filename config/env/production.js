@@ -250,10 +250,9 @@ module.exports = {
         * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
         *                                                                          *
         ***************************************************************************/
-        // onlyAllowOrigins: [
-        //   'https://example.com',
-        //   'https://staging.example.com',
-        // ],
+        onlyAllowOrigins: [
+            'https://web.cs.dal.ca',
+        ],
 
 
         /***************************************************************************
@@ -373,6 +372,7 @@ module.exports = {
     custom: {
         baseUrl: 'https://example.com',
         internalEmailAddress: 'support@example.com',
+        clientServer: 'https://web.cs.dal.ca/'
 
         // mailgunDomain: 'mg.example.com',
         // mailgunSecret: 'key-prod_fake_bd32301385130a0bafe030c',
