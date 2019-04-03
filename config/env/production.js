@@ -252,6 +252,7 @@ module.exports = {
         ***************************************************************************/
         onlyAllowOrigins: [
             'https://web.cs.dal.ca',
+            'http://localhost:4200'
         ],
 
 
