@@ -29,7 +29,7 @@ module.exports = {
 
     fn: async function (inputs, exits) {
 
-        await User.removeFromCollection(this.req.me.id, 'maintain').members(inputs.itineraryId);
+        await User.removeFromCollection(inputs.friendId, 'maintain').members(inputs.itineraryId);
         let group = await Groups.findOne({ itinerary: inputs.itineraryId });
         await User.removeFromCollection(inputs.friendId, 'belongTo').members(group.id);
         return exits.success({ message: 'Friend Removed from itinerary' });
