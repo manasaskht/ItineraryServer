@@ -33,7 +33,7 @@ module.exports = {
             let user = await User.findOne({ id: messages[i].sender });
             messages[i].senderName = user.firstName + ' ' + user.lastName;
         }
-        return exits.success(messagses);
+        return exits.success(messages);
     }
 
 
