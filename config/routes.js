@@ -21,6 +21,11 @@ module.exports.routes = {
     'GET /itinerary/ls': 'itinerary/list',
     'GET /itinerary/item/ls': 'itinerary/item/list',
 
+    'POST /updateProfile': 'profile/update-profile-details',
+    'GET /profile': 'profile/profile',
+    'GET /profileImage': 'profile/fetchimage',
+    'POST /uploadfile': 'profile/fileupload',
+
     'GET /itinerary/notes': 'itinerary/notes/list',
     'PUT /itinerary/notes/update': 'itinerary/notes/update',
     'POST /itinerary/notes/new': 'itinerary/notes/new',
