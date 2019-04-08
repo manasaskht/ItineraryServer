@@ -51,7 +51,6 @@ module.exports = {
         await Groups.addToCollection(group.id, 'members', inputs.friendId);
         await Itineraries.addToCollection(inputs.itineraryId, 'usergroup', inputs.friendId);
         return exits.success({});
-
     }
 
 

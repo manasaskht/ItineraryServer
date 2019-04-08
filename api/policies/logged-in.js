@@ -13,7 +13,11 @@ module.exports = async function (req, res, proceed) {
             if (isVerified) {
                 let payload = jwt.decode(authorization[1]);
                 req['me'] = await User.findOne({ id: payload.userId });
-                return proceed();
+                if (req['me']) {
+                    return proceed();
+                } else {
+                    res.forbidden({ message: 'Invalid user.' });
+                }
             } else {
                 res.forbidden({ message: 'Invalid token. Please login again.' });
             }
