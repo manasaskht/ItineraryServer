@@ -45,22 +45,32 @@ module.exports = {
             statusCode: 200,
             description: 'Item created'
         },
+        userIncorrect: {
+            statusCode: 400,
+            description: 'Incorrect user editing itinerary'
+        }
     },
 
 
     fn: async function (inputs, exits) {
-        let itemVals = {
-            title: inputs.title,
-            description: inputs.description,
-            itinerary: inputs.itineraryId,
-            category: inputs.category,
-            location: inputs.location,
-            dateTime: inputs.dateTime,
-            locationLatLng: inputs.locationLatLng
-        };
-        itemVals = _.pick(itemVals, _.identity);
-        let itineraryItem = await ItineraryItems.create(itemVals).fetch();
-        return exits.success({ itineraryItem, message: 'Item successfully created.' });
+        let isUsersItinerary = await Itineraries.findOne({ id: inputs.itineraryId }).populate('usergroup', { id: this.req.me.id });
+        isUsersItinerary = isUsersItinerary.creator === this.req.me.id || isUsersItinerary.usergroup.findIndex(d => d.id === this.req.me.id) > -1;
+        if (isUsersItinerary) {
+            let itemVals = {
+                title: inputs.title,
+                description: inputs.description,
+                itinerary: inputs.itineraryId,
+                category: inputs.category,
+                location: inputs.location,
+                dateTime: inputs.dateTime,
+                locationLatLng: inputs.locationLatLng
+            };
+            itemVals = _.pick(itemVals, _.identity);
+            let itineraryItem = await ItineraryItems.create(itemVals).fetch();
+            return exits.success({ itineraryItem, message: 'Item successfully created.' });
+        } else {
+            return exits.userIncorrect({ message: 'You don\'t have access to this itinerary.' });
+        }
     }
 
 

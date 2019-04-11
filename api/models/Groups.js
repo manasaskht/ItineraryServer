@@ -1,5 +1,5 @@
 /**
- * Itineraries.js
+ * Groups.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,24 +13,17 @@ module.exports = {
         //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
         //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-        title: {
+        name: {
             type: 'string',
             required: true,
             maxLength: 500,
-            example: 'Trip to Arabia'
-        },
-
-        description: {
-            type: 'string',
-            maxLength: 3000,
-            example: 'Going for brother\'s marrige. Thinking about scavanging the place.'
+            example: 'Trip to Mars'
         },
 
         archived: {
             type: 'boolean',
             defaultsTo: false
         },
-
 
         //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
         //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -41,15 +34,16 @@ module.exports = {
         //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
         //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-        creator: {
-            model: 'user',
+        itinerary: {
+            model: 'itineraries',
             required: true
         },
 
-        usergroup: {
+        members: {
             collection: 'user',
-            via: 'maintain'
+            via: 'belongTo'
         }
+
     },
 
 };

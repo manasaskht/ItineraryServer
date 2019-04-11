@@ -1,5 +1,5 @@
 /**
- * Itineraries.js
+ * Chat.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -9,28 +9,15 @@ module.exports = {
 
     attributes: {
 
+
         //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
         //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
         //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-        title: {
+        message: {
             type: 'string',
-            required: true,
-            maxLength: 500,
-            example: 'Trip to Arabia'
+            required: true
         },
-
-        description: {
-            type: 'string',
-            maxLength: 3000,
-            example: 'Going for brother\'s marrige. Thinking about scavanging the place.'
-        },
-
-        archived: {
-            type: 'boolean',
-            defaultsTo: false
-        },
-
 
         //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
         //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -41,15 +28,16 @@ module.exports = {
         //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
         //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-        creator: {
+        sender: {
             model: 'user',
             required: true
         },
 
-        usergroup: {
-            collection: 'user',
-            via: 'maintain'
+        group: {
+            model: 'groups',
+            required: true
         }
+
     },
 
 };

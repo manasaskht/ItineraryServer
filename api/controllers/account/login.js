@@ -53,6 +53,7 @@ module.exports = {
             let jwtToken = jwt.sign(payload, sails.config.session.secret, { expiresIn: '24h' });
             return exits.success({
                 token: jwtToken,
+                id: loginUser.id,
                 firstName: loginUser.firstName,
                 lastName: loginUser.lastName,
                 email: loginUser.emailAddress

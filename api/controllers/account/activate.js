@@ -1,63 +1,58 @@
 module.exports = {
+    friendlyName: "Activate",
 
-
-    friendlyName: 'Activate',
-
-
-    description: 'Activate account.',
-
+    description: "Activate account.",
 
     inputs: {
         userId: {
-            type: 'number',
-            description: 'user id',
+            type: "string",
+            description: "user id",
             required: true
         },
         token: {
-            type: 'string',
-            description: 'activation token',
+            type: "string",
+            description: "activation token",
             required: true
         }
     },
-
 
     exits: {
         success: {
             statusCode: 200,
-            description: ''
+            description: ""
         },
         invalidToken: {
             statusCode: 400,
-            description: 'Invalid user or token'
+            description: "Invalid user or token"
         }
-
     },
-
 
     fn: async function (inputs, exits) {
         let user = await User.findOne({ id: inputs.userId });
         if (!user) {
-            return exits.invalidToken({ message: 'Invalid user or token.' });
+            return exits.invalidToken({ msg: "Invalid user or token." });
         } else {
-            let currentTime = (new Date()).getTime();
-            if (user.emailStatus === 'confirmed') {
-                return exits.invalidToken({ message: 'User already active.' });
+            let currentTime = new Date().getTime();
+            if (user.emailStatus === "confirmed") {
+                return exits.invalidToken({ msg: "User already active." });
             }
 
             if (user.emailVerifyExpireTime < currentTime) {
-                return exits.invalidToken({ message: 'Token has expired. Please register again.' });
+                return exits.invalidToken({
+                    msg: "Token has expired. Please register again."
+                });
             } else {
                 if (inputs.token === user.emailVerifyCode) {
-                    await User.update({ id: inputs.userId }).set({ emailStatus: 'confirmed' });
-                    return exits.success({ message: 'User activated please login.' })
+                    await User.update({ id: inputs.userId }).set({
+                        emailStatus: "confirmed"
+                    });
+                    return exits.success({ msg: "User activated please login." });
                 } else {
-                    return exits.invalidToken({ message: 'Invalid user or token.' });
+                    return exits.invalidToken({ msg: "Invalid user or token." });
                 }
             }
         }
 
         return;
     }
-
-
 };

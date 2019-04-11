@@ -62,6 +62,22 @@ module.exports = {
             type: 'number',
             description: 'The confirmation status of the user\'s email address.'
         },
+        userPhotoURL: {
+            type: 'string',
+            description: 'Profile picture'
+        },
+        age: {
+            type: 'number',
+            description: 'Profile picture'
+        },
+        sex: {
+            type: 'string',
+            description: 'Profile picture'
+        },
+        bio: {
+            type: 'string',
+            description: 'Profile picture'
+        },
 
 
         //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -72,6 +88,18 @@ module.exports = {
         //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
         //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
         //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
+        
+
+        belongTo: {
+            collection: 'groups',
+            via: 'members'
+        },
+
+        maintain: {
+            collection: 'itineraries',
+            via: 'usergroup'
+        }
 
     },
 

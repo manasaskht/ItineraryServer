@@ -61,11 +61,13 @@ module.exports = {
         }, _.identity);
 
         let itineraryItem = await ItineraryItems.findOne({ id: inputs.itemId }).populate('itinerary');
+
+        let isUsersItinerary = await Itineraries.findOne({ id: itineraryItem.itinerary.id }).populate('usergroup', { id: this.req.me.id });
+        isUsersItinerary = isUsersItinerary.creator === this.req.me.id || isUsersItinerary.usergroup.findIndex(d => d.id === this.req.me.id) > -1;
         if (_.isEmpty(updates)) {
             return exits.noUpdates({ message: 'No changes made.' })
-        } else if (itineraryItem.itinerary.creator === this.req.me.id) {
-            await ItineraryItems.updateOne({ id: inputs.itemId })
-                .set(updates);
+        } else if (isUsersItinerary) { // (itineraryItem.itinerary.creator === this.req.me.id) {
+            await ItineraryItems.updateOne({ id: inputs.itemId }).set(updates);
             return exits.success({ message: 'Edited itinerary item.' })
         }
 
