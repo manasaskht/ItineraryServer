@@ -2,6 +2,23 @@
 
 a [Sails v1](https://sailsjs.com) application
 
+SailsJS is a NodeJS based server-side framework. It provides a good architecture for development of web apis.
+
+
+* Open git bash and clone : `git@git.cs.dal.ca:ntyagi/itinerary-server.git`
+* run command : git checkout master
+* run command : npm install  (to install required node modules)
+* run command : sails lift (It will start the backend server at localhost:1337)
+
+
+
+
+`SendGrid:` To send registration email, SendGrid is a professional email service which offers free smtp server.
+
+`JWT: JSON Web Tokens`. For authentication of users, Json web tokens are implemented. JWTs has certain expiry time embedded in themselves and allow authorization of users without storing the token in a database. It is also helpful when creating multiple servers for horizontal scaling.
+
+`Database:` Currently simple file database offered by SailsJS ORM (Waterline) is used known as sails-disk db. This database simply creates a file for each model and saves data as rows.
+
 
 ### Links
 
@@ -11,16 +28,4 @@ a [Sails v1](https://sailsjs.com) application
 + [Community support options](https://sailsjs.com/support)
 + [Professional / enterprise options](https://sailsjs.com/enterprise)
 
-
-### Version info
-
-This app was originally generated on Sat Feb 16 2019 15:37:23 GMT-0400 (Atlantic Standard Time) using Sails v1.1.0.
-
-<!-- Internally, Sails used [`sails-generate@1.16.4`](https://github.com/balderdashy/sails-generate/tree/v1.16.4/lib/core-generators/new). -->
-
-
-
-<!--
-Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
--->
 
