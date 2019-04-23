@@ -78,6 +78,10 @@ module.exports = {
             type: 'string',
             description: 'Profile picture'
         },
+        socketId: {
+            type: 'string',
+            description: 'Socket id'
+        },
 
 
         //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -89,7 +93,7 @@ module.exports = {
         //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
         //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-        
+
 
         belongTo: {
             collection: 'groups',

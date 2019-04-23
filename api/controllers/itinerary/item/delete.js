@@ -34,12 +34,20 @@ module.exports = {
     fn: async function (inputs, exits) {
         // find itinerary, if user is friend in itinerary or user created itinerary he can delete items.
         // use itemid to delete item in timeline.
-        let isUsersItinerary = await Itineraries.findOne({ id: inputs.itineraryId }).populate('usergroup', { id: this.req.me.id });
-        isUsersItinerary = isUsersItinerary.creator === this.req.me.id || isUsersItinerary.usergroup.findIndex(d => d.id === this.req.me.id) > -1;
-        // let itinerary = await Itineraries.findOne({ id: inputs.itineraryId }).populate('creator');
+        let group = await Groups.findOne({ itinerary: inputs.itineraryId }).populate('members');
         let destroyedObj = null;
-        if (isUsersItinerary) {
+        if (group.members.findIndex(d => d.id === this.req.me.id) > -1) {
             destroyedObj = await ItineraryItems.destroyOne({ id: inputs.itemId });
+
+            // update using sockets
+            for (let i = 0; i < group.members.length; i++) {
+                let member = group.members[i];
+                destroyedObj.action = 'delete';
+                if (member.id !== this.req.me.id)
+                    sails.sockets.broadcast(member.socketId, 'timeline', destroyedObj);
+            }
+
+            // respond
             return exits.success({ message: 'Deleted itinerary item.' })
         }
         return exits.invalidUser({ message: 'Unable to delete itinerary item.' });

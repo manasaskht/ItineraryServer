@@ -7,7 +7,7 @@ module.exports = async function (req, res, proceed) {
             try {
                 isVerified = jwt.verify(authorization[1], sails.config.session.secret);
             } catch (err) {
-                res.forbidden(err);
+                return res.forbidden(err);
             }
 
             if (isVerified) {
@@ -16,10 +16,10 @@ module.exports = async function (req, res, proceed) {
                 if (req['me']) {
                     return proceed();
                 } else {
-                    res.forbidden({ message: 'Invalid user.' });
+                    return res.forbidden({ message: 'Invalid user.' });
                 }
             } else {
-                res.forbidden({ message: 'Invalid token. Please login again.' });
+                return res.forbidden({ message: 'Invalid token. Please login again.' });
             }
         } else {
             return res.forbidden({ message: 'Invalid authentication format.' });
@@ -27,5 +27,4 @@ module.exports = async function (req, res, proceed) {
     } else {
         return res.forbidden({ message: 'Authorization token required for access.' })
     }
-    return proceed();
 }

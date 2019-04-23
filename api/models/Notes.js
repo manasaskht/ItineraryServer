@@ -12,45 +12,45 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
 
-  attributes: {
+    attributes: {
 
-    noteTitle: {
-      type: 'string',
-      required: true,
-      maxLength: 500,
-      example: 'Things to pack'
-  },
+        noteTitle: {
+            type: 'string',
+            required: true,
+            maxLength: 500,
+            example: 'Things to pack'
+        },
 
-    noteText: {
-      type: 'string',
-      required: true,
-      maxLength: 1000,
-      example: 'Things to pack'
-  },
-
- 
-
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+        noteText: {
+            type: 'string',
+            required: true,
+            maxLength: 1000,
+            example: 'Things to pack'
+        },
 
 
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    
-    itinerary: {
-      model: 'itineraries',
-      required: true
-  },
 
-    creator: {
-      model: 'user',
-      required: true
-  },
+        //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
+        //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
+        //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
 
-  },
+        //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
+        //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
+        //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
+        itinerary: {
+            model: 'itineraries',
+            required: true
+        },
+
+        creator: {
+            model: 'user',
+            required: true
+        },
+
+
+    },
 
 };
 

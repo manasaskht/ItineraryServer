@@ -43,6 +43,13 @@ module.exports = {
             username: this.req.me.firstName,
             creator: this.req.me.id
         }).fetch();
+
+        let group = await Groups.findOne({ itinerary: inputs.itineraryId }).populate('members');
+        for (let i = 0; i < group.members.length; i++) {
+            let member = group.members[i];
+            if (member.id !== this.req.me.id)
+                sails.sockets.broadcast(member.socketId, 'note', note);
+        }
         return exits.success({ note, message: 'Note successfully addeded.' });
     }
 

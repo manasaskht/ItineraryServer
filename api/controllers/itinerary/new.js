@@ -30,6 +30,14 @@ module.exports = {
             description: inputs.description,
             creator: this.req.me.id
         }).fetch();
+
+        // Create itinerary group and add the creator
+        let group = await Groups.create({
+            name: inputs.title,
+            itinerary: itinerary.id
+        }).fetch();
+        await Groups.addToCollection(group.id, 'members', this.req.me.id);
+
         return exits.success({ itinerary, message: 'Itinerary successfully created.' });
     }
 };

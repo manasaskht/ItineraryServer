@@ -62,12 +62,20 @@ module.exports = {
 
         let itineraryItem = await ItineraryItems.findOne({ id: inputs.itemId }).populate('itinerary');
 
-        let isUsersItinerary = await Itineraries.findOne({ id: itineraryItem.itinerary.id }).populate('usergroup', { id: this.req.me.id });
-        isUsersItinerary = isUsersItinerary.creator === this.req.me.id || isUsersItinerary.usergroup.findIndex(d => d.id === this.req.me.id) > -1;
+        let group = await Groups.findOne({ itinerary: itineraryItem.itinerary.id }).populate('members');
         if (_.isEmpty(updates)) {
             return exits.noUpdates({ message: 'No changes made.' })
-        } else if (isUsersItinerary) { // (itineraryItem.itinerary.creator === this.req.me.id) {
-            await ItineraryItems.updateOne({ id: inputs.itemId }).set(updates);
+        } else if (group.members.findIndex(d => d.id === this.req.me.id) > -1) {
+            let updatedItem = await ItineraryItems.updateOne({ id: inputs.itemId }).set(updates);
+            // update using sockets
+            for (let i = 0; i < group.members.length; i++) {
+                let member = group.members[i];
+                updatedItem.action = 'update';
+                if (member.id !== this.req.me.id)
+                    sails.sockets.broadcast(member.socketId, 'timeline', updatedItem);
+            }
+
+            // respond to request
             return exits.success({ message: 'Edited itinerary item.' })
         }
 

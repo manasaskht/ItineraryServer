@@ -53,9 +53,8 @@ module.exports = {
 
 
     fn: async function (inputs, exits) {
-        let isUsersItinerary = await Itineraries.findOne({ id: inputs.itineraryId }).populate('usergroup', { id: this.req.me.id });
-        isUsersItinerary = isUsersItinerary.creator === this.req.me.id || isUsersItinerary.usergroup.findIndex(d => d.id === this.req.me.id) > -1;
-        if (isUsersItinerary) {
+        let group = await Groups.findOne({ itinerary: inputs.itineraryId }).populate('members');
+        if (group.members.findIndex(d => d.id === this.req.me.id) > -1) {
             let itemVals = {
                 title: inputs.title,
                 description: inputs.description,
@@ -67,6 +66,13 @@ module.exports = {
             };
             itemVals = _.pick(itemVals, _.identity);
             let itineraryItem = await ItineraryItems.create(itemVals).fetch();
+
+            for (let i = 0; i < group.members.length; i++) {
+                let member = group.members[i];
+                if (member.id !== this.req.me.id)
+                    sails.sockets.broadcast(member.socketId, 'timeline', itineraryItem);
+            }
+
             return exits.success({ itineraryItem, message: 'Item successfully created.' });
         } else {
             return exits.userIncorrect({ message: 'You don\'t have access to this itinerary.' });

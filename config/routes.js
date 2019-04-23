@@ -46,5 +46,6 @@ module.exports.routes = {
     'POST /chat/friend/add': 'chat/add',
     'POST /chat/group/add': 'chat/addgroup',
     'POST /chat/message/send': 'chat/send',
-    'GET /chat/message/get': 'chat/get'
+    'GET /chat/message/get': 'chat/get',
+    'GET /socket/connect': 'socket/connect'
 };
